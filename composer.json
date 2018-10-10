@@ -4,12 +4,9 @@
     "license": "MIT",
     "keywords": [
         "php",
-        "swoole",
-        "swoft",
-        "db",
-        "model"
+        "aliyun"
     ],
-    "description": "阿里云PHP",
+    "description": "阿里云PHP SDK 核心组件",
     "authors": [
         {
             "name": "李铭昕",
@@ -27,11 +24,9 @@
         }
     },
     "require": {
-        "php": ">=7.0",
-        "swoft/framework": "^1.0.24"
+        "php": ">=7.0"
     },
     "require-dev": {
-        "swoft/swoole-ide-helper": "dev-master",
         "phpunit/phpunit": "^5.7"
     }
 }
