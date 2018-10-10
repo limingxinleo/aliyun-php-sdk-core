@@ -7,18 +7,20 @@
  * @contact  limingxin@swoft.org
  * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
+namespace Xin\Aliyun\Core\Regions;
+
 class ProductDomain
 {
     private $productName;
 
     private $domainName;
-    
+
     public function __construct($product, $domain)
     {
         $this->productName = $product;
         $this->domainName = $domain;
     }
-    
+
     public function getProductName()
     {
         return $this->productName;

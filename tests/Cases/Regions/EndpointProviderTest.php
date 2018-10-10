@@ -7,9 +7,12 @@
  * @contact  limingxin@swoft.org
  * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
-include_once '../../Config.php';
+namespace SwoftTest\Cases\Regions;
 
-class EndpointProviderTest extends PHPUnit_Framework_TestCase
+use SwoftTest\Cases\AbstractTestCase;
+use Xin\Aliyun\Core\Regions\EndpointProvider;
+
+class EndpointProviderTest extends AbstractTestCase
 {
     public function testFindProductDomain()
     {

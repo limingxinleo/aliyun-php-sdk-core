@@ -11,6 +11,7 @@
 namespace Xin\Aliyun\Core\Regions;
 
 use Xin\Aliyun\Core\Constant;
+use Xin\Aliyun\Core\Http\HttpHelper;
 
 class LocationService
 {

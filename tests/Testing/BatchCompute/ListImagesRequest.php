@@ -7,9 +7,11 @@
  * @contact  limingxin@swoft.org
  * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
-namespace UnitTest\BatchCompute\Request;
+namespace SwoftTest\Testing\BatchCompute;
 
-class ListImagesRequest extends \RoaAcsRequest
+use Xin\Aliyun\Core\RoaAcsRequest;
+
+class ListImagesRequest extends RoaAcsRequest
 {
     public function __construct()
     {

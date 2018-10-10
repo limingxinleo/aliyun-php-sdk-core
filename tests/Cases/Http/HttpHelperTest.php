@@ -7,8 +7,12 @@
  * @contact  limingxin@swoft.org
  * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
-include_once '../BaseTest.php';
-class HttpHelperTest extends BaseTest
+namespace SwoftTest\Cases\Http;
+
+use SwoftTest\Cases\AbstractTestCase;
+use Xin\Aliyun\Core\Http\HttpHelper;
+
+class HttpHelperTest extends AbstractTestCase
 {
     public function testCurl()
     {

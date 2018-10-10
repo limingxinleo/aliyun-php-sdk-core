@@ -7,9 +7,11 @@
  * @contact  limingxin@swoft.org
  * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
-namespace UnitTest\Ecs\Request;
+namespace SwoftTest\Testing\Ecs\Request;
 
-class DescribeRegionsRequest extends \RpcAcsRequest
+use Xin\Aliyun\Core\RpcAcsRequest;
+
+class DescribeRegionsRequest extends RpcAcsRequest
 {
     public function __construct()
     {
@@ -32,7 +34,7 @@ class DescribeRegionsRequest extends \RpcAcsRequest
     public function setOwnerId($ownerId)
     {
         $this->ownerId = $ownerId;
-        $this->queryParameters['OwnerId']=$ownerId;
+        $this->queryParameters['OwnerId'] = $ownerId;
     }
 
     public function getResourceOwnerAccount()
@@ -43,7 +45,7 @@ class DescribeRegionsRequest extends \RpcAcsRequest
     public function setResourceOwnerAccount($resourceOwnerAccount)
     {
         $this->resourceOwnerAccount = $resourceOwnerAccount;
-        $this->queryParameters['ResourceOwnerAccount']=$resourceOwnerAccount;
+        $this->queryParameters['ResourceOwnerAccount'] = $resourceOwnerAccount;
     }
 
     public function getResourceOwnerId()
@@ -54,7 +56,7 @@ class DescribeRegionsRequest extends \RpcAcsRequest
     public function setResourceOwnerId($resourceOwnerId)
     {
         $this->resourceOwnerId = $resourceOwnerId;
-        $this->queryParameters['ResourceOwnerId']=$resourceOwnerId;
+        $this->queryParameters['ResourceOwnerId'] = $resourceOwnerId;
     }
 
     public function getOwnerAccount()
@@ -65,6 +67,6 @@ class DescribeRegionsRequest extends \RpcAcsRequest
     public function setOwnerAccount($ownerAccount)
     {
         $this->ownerAccount = $ownerAccount;
-        $this->queryParameters['OwnerAccount']=$ownerAccount;
+        $this->queryParameters['OwnerAccount'] = $ownerAccount;
     }
 }

@@ -3,6 +3,7 @@
 namespace Xin\Aliyun\Core\Regions;
 
 use Xin\Aliyun\Core\Constant;
+use Xin\Aliyun\Core\RpcAcsRequest;
 
 class DescribeEndpointRequest extends RpcAcsRequest
 {

@@ -7,9 +7,12 @@
  * @contact  limingxin@swoft.org
  * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
-include_once '../../Config.php';
+namespace SwoftTest\Cases\Auth;
 
-class ShaHmac256SignerTest extends PHPUnit_Framework_TestCase
+use SwoftTest\Cases\AbstractTestCase;
+use Xin\Aliyun\Core\Auth\ShaHmac256Signer;
+
+class ShaHmac256SignerTest extends AbstractTestCase
 {
     public function testShaHmac256Signer()
     {

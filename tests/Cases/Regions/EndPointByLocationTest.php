@@ -8,12 +8,15 @@
  * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
 
-include_once '../../Config.php';
+namespace SwoftTest\Cases\Regions;
 
-use PHPUnit\Framework\TestCase;
+use SwoftTest\Cases\AbstractTestCase;
+use Xin\Aliyun\Core\Profile\DefaultProfile;
+use Xin\Aliyun\Core\Regions\LocationService;
 
-class EndPointByLocationTest extends TestCase
+class EndPointByLocationTest extends AbstractTestCase
 {
+    /** @var  LocationService */
     private $locationService;
 
     private $clientProfile;

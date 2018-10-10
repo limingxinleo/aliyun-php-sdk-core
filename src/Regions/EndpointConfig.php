@@ -9,6 +9,8 @@
  */
 
 use Xin\Aliyun\Core\Regions\EndpointProvider;
+use Xin\Aliyun\Core\Regions\ProductDomain;
+use Xin\Aliyun\Core\Regions\Endpoint;
 
 $endpoint_filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'endpoints.xml';
 $xml = simplexml_load_string(file_get_contents($endpoint_filename));

@@ -16,7 +16,10 @@
     "autoload": {
         "psr-4": {
             "Xin\\Aliyun\\Core\\": "src/"
-        }
+        },
+        "files": [
+            "src/Regions/EndpointConfig.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

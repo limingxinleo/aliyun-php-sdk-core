@@ -7,9 +7,11 @@
  * @contact  limingxin@swoft.org
  * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
-namespace UnitTest\Ft;
+namespace SwoftTest\Testing\Ft;
 
-class TestRoaApiRequest extends \RoaAcsRequest
+use Xin\Aliyun\Core\RoaAcsRequest;
+
+class TestRoaApiRequest extends RoaAcsRequest
 {
     public function __construct()
     {
@@ -32,7 +34,7 @@ class TestRoaApiRequest extends \RoaAcsRequest
     public function setQueryParam($queryParam)
     {
         $this->queryParam = $queryParam;
-        $this->queryParameters['QueryParam']=$queryParam;
+        $this->queryParameters['QueryParam'] = $queryParam;
     }
 
     public function getBodyParam()
@@ -43,7 +45,7 @@ class TestRoaApiRequest extends \RoaAcsRequest
     public function setBodyParam($bodyParam)
     {
         $this->bodyParam = $bodyParam;
-        $this->queryParameters['BodyParam']=$bodyParam;
+        $this->queryParameters['BodyParam'] = $bodyParam;
     }
 
     public function getHeaderParam()
@@ -54,6 +56,6 @@ class TestRoaApiRequest extends \RoaAcsRequest
     public function setHeaderParam($headerParam)
     {
         $this->headerParam = $headerParam;
-        $this->headerParam['HeaderParam']=$headerParam;
+        $this->headerParam['HeaderParam'] = $headerParam;
     }
 }
