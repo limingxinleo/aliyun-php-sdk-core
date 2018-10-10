@@ -1,0 +1,37 @@
+{
+    "name": "limingxinleo/aliyun-php-sdk-core",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "swoole",
+        "swoft",
+        "db",
+        "model"
+    ],
+    "description": "阿里云PHP",
+    "authors": [
+        {
+            "name": "李铭昕",
+            "email": "limingxin@swoft.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Xin\\Aliyun\\Core\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SwoftTest\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "swoft/framework": "^1.0.24"
+    },
+    "require-dev": {
+        "swoft/swoole-ide-helper": "dev-master",
+        "phpunit/phpunit": "^5.7"
+    }
+}
