@@ -10,6 +10,7 @@
 namespace Xin\Aliyun\Core\Http;
 
 use Xin\Aliyun\Core\Constant;
+use Xin\Aliyun\Core\Exception\ClientException;
 
 class HttpHelper
 {

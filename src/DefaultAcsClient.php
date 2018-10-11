@@ -9,6 +9,10 @@
  */
 namespace Xin\Aliyun\Core;
 
+use Xin\Aliyun\Core\Http\HttpHelper;
+use Xin\Aliyun\Core\Regions\EndpointProvider;
+use Xin\Aliyun\Core\Regions\LocationService;
+
 class DefaultAcsClient implements IAcsClient
 {
     public $iClientProfile;

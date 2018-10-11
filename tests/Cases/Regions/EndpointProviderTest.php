@@ -16,6 +16,6 @@ class EndpointProviderTest extends AbstractTestCase
 {
     public function testFindProductDomain()
     {
-        $this->assertEquals('ecs.aliyuncs.com', EndpointProvider::findProductDomain('cn-hangzhou', 'Ecs'));
+        $this->assertEquals('ecs-cn-hangzhou.aliyuncs.com', EndpointProvider::findProductDomain('cn-hangzhou', 'Ecs'));
     }
 }

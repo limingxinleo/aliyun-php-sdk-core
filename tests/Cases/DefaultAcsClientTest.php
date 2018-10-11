@@ -7,26 +7,19 @@
  * @contact  limingxin@swoft.org
  * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
-include_once 'BaseTest.php';
-use UnitTest\Ecs\Request as Ecs;
-use UnitTest\BatchCompute\Request as BC;
+namespace SwoftTest\Cases;
 
-class DefaultAcsClientTest extends BaseTest
+use SwoftTest\Testing\Ecs\Request\DescribeRegionsRequest;
+
+class DefaultAcsClientTest extends AbstractTestCase
 {
     public function testDoActionRPC()
     {
-        $request = new Ecs\DescribeRegionsRequest();
-        $response = $this->client->doAction($request);
+        $request = new DescribeRegionsRequest();
+        $response = $this->client->getAcsResponse($request);
         
         $this->assertNotNull($response->RequestId);
         $this->assertNotNull($response->Regions->Region[0]->LocalName);
         $this->assertNotNull($response->Regions->Region[0]->RegionId);
-    }
-    
-    public function testDoActionROA()
-    {
-        $request = new BC\ListImagesRequest();
-        $response = $this->client->doAction($request);
-        $this->assertNotNull($response);
     }
 }
