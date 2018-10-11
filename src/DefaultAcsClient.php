@@ -9,6 +9,7 @@
  */
 namespace Xin\Aliyun\Core;
 
+use Xin\Aliyun\Core\Exception\ServerException;
 use Xin\Aliyun\Core\Http\HttpHelper;
 use Xin\Aliyun\Core\Regions\EndpointProvider;
 use Xin\Aliyun\Core\Regions\LocationService;
