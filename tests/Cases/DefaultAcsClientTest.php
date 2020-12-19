@@ -1,17 +1,23 @@
 <?php
+
+declare(strict_types=1);
 /**
- * This file is part of Swoft.
+ * This file is part of Hyperf.
  *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 namespace SwoftTest\Cases;
 
 use SwoftTest\Testing\Ecs\Request\DescribeRegionsRequest;
 use SwoftTest\Testing\Sts\AssumeRoleRequest;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class DefaultAcsClientTest extends AbstractTestCase
 {
     public function testDoActionRPC()
@@ -27,7 +33,7 @@ class DefaultAcsClientTest extends AbstractTestCase
     public function testStsAssumeRoleRequest()
     {
         $request = new AssumeRoleRequest();
-        $request->setRoleSessionName("username");
+        $request->setRoleSessionName('username');
         $request->setRoleArn('acs:ram::11111111:role/aliyunosstokengeneratorrole');
         $request->setPolicy('{
   "Statement": [

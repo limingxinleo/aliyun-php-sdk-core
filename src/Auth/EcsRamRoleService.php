@@ -1,13 +1,14 @@
 <?php
-/**
- * This file is part of Swoft.
- *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
- */
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 namespace Xin\Aliyun\Core\Auth;
 
 use Xin\Aliyun\Core\Constant;
@@ -16,9 +17,9 @@ class EcsRamRoleService
 {
     private $clientProfile;
 
-    private $lastClearTime = null;
+    private $lastClearTime;
 
-    private $sessionCredential = null;
+    private $sessionCredential;
 
     public function __construct($clientProfile)
     {
@@ -54,7 +55,7 @@ class EcsRamRoleService
         $requestUrl = 'http://100.100.100.200/latest/meta-data/ram/security-credentials/' . $ecsRamRoleCredential->getRoleName();
 
         $httpResponse = HttpHelper::curl($requestUrl, 'GET', null, null);
-        if (!$httpResponse->isSuccess()) {
+        if (! $httpResponse->isSuccess()) {
             return null;
         }
 

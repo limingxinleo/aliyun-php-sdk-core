@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
 /**
- * This file is part of Swoft.
+ * This file is part of Hyperf.
  *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 namespace Xin\Aliyun\Core;
 
@@ -19,25 +21,6 @@ abstract class RpcAcsRequest extends AcsRequest
     {
         parent::__construct($product, $version, $actionName, $locationServiceCode, $locationEndpointType);
         $this->initialize();
-    }
-
-    private function initialize()
-    {
-        $this->setMethod('GET');
-        $this->setAcceptFormat('JSON');
-    }
-
-    private function prepareValue($value)
-    {
-        if (is_bool($value)) {
-            if ($value) {
-                return 'true';
-            } else {
-                return 'false';
-            }
-        } else {
-            return $value;
-        }
     }
 
     public function composeUrl($iSigner, $credential, $domain)
@@ -65,36 +48,13 @@ abstract class RpcAcsRequest extends AcsRequest
                 $this->putDomainParameters($apiParamKey, $apiParamValue);
             }
             return $requestUrl;
-        } else {
-            $requestUrl = $this->getProtocol() . '://' . $domain . '/?';
-
-            foreach ($apiParams as $apiParamKey => $apiParamValue) {
-                $requestUrl .= "$apiParamKey=" . urlencode($apiParamValue) . '&';
-            }
-            return substr($requestUrl, 0, -1);
         }
-    }
+        $requestUrl = $this->getProtocol() . '://' . $domain . '/?';
 
-    private function computeSignature($parameters, $accessKeySecret, $iSigner)
-    {
-        ksort($parameters);
-        $canonicalizedQueryString = '';
-        foreach ($parameters as $key => $value) {
-            $canonicalizedQueryString .= '&' . $this->percentEncode($key) . '=' . $this->percentEncode($value);
+        foreach ($apiParams as $apiParamKey => $apiParamValue) {
+            $requestUrl .= "{$apiParamKey}=" . urlencode($apiParamValue) . '&';
         }
-        $stringToSign = parent::getMethod() . '&%2F&' . $this->percentencode(substr($canonicalizedQueryString, 1));
-        $signature = $iSigner->signString($stringToSign, $accessKeySecret . '&');
-
-        return $signature;
-    }
-
-    protected function percentEncode($str)
-    {
-        $res = urlencode($str);
-        $res = preg_replace('/\+/', '%20', $res);
-        $res = preg_replace('/\*/', '%2A', $res);
-        $res = preg_replace('/%7E/', '~', $res);
-        return $res;
+        return substr($requestUrl, 0, -1);
     }
 
     public function getDomainParameter()
@@ -105,5 +65,41 @@ abstract class RpcAcsRequest extends AcsRequest
     public function putDomainParameters($name, $value)
     {
         $this->domainParameters[$name] = $value;
+    }
+
+    protected function percentEncode($str)
+    {
+        $res = urlencode($str);
+        $res = preg_replace('/\+/', '%20', $res);
+        $res = preg_replace('/\*/', '%2A', $res);
+        return preg_replace('/%7E/', '~', $res);
+    }
+
+    private function initialize()
+    {
+        $this->setMethod('GET');
+        $this->setAcceptFormat('JSON');
+    }
+
+    private function prepareValue($value)
+    {
+        if (is_bool($value)) {
+            if ($value) {
+                return 'true';
+            }
+            return 'false';
+        }
+        return $value;
+    }
+
+    private function computeSignature($parameters, $accessKeySecret, $iSigner)
+    {
+        ksort($parameters);
+        $canonicalizedQueryString = '';
+        foreach ($parameters as $key => $value) {
+            $canonicalizedQueryString .= '&' . $this->percentEncode($key) . '=' . $this->percentEncode($value);
+        }
+        $stringToSign = parent::getMethod() . '&%2F&' . $this->percentencode(substr($canonicalizedQueryString, 1));
+        return $iSigner->signString($stringToSign, $accessKeySecret . '&');
     }
 }

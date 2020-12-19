@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
 /**
- * This file is part of Swoft.
+ * This file is part of Hyperf.
  *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 namespace Xin\Aliyun\Core;
 
@@ -43,22 +45,28 @@ class DefaultAcsClient implements IAcsClient
     {
         $httpResponse = $this->doActionImpl($request, $iSigner, $credential, $autoRetry, $maxRetryNumber);
         $respObject = $this->parseAcsResponse($httpResponse->getBody(), $request->getAcceptFormat());
-        if (false == $httpResponse->isSuccess()) {
+        if ($httpResponse->isSuccess() == false) {
             $this->buildApiException($respObject, $httpResponse->getStatus());
         }
         return $respObject;
     }
 
+    public function doAction($request, $iSigner = null, $credential = null, $autoRetry = true, $maxRetryNumber = 3)
+    {
+        trigger_error('doAction() is deprecated. Please use getAcsResponse() instead.', E_USER_NOTICE);
+        return $this->doActionImpl($request, $iSigner, $credential, $autoRetry, $maxRetryNumber);
+    }
+
     private function doActionImpl($request, $iSigner = null, $credential = null, $autoRetry = true, $maxRetryNumber = 3)
     {
-        if (null == $this->iClientProfile && (null == $iSigner || null == $credential
-                || null == $request->getRegionId() || null == $request->getAcceptFormat())) {
+        if ($this->iClientProfile == null && ($iSigner == null || $credential == null
+                || $request->getRegionId() == null || $request->getAcceptFormat() == null)) {
             throw new ClientException('No active profile found.', 'SDK.InvalidProfile');
         }
-        if (null == $iSigner) {
+        if ($iSigner == null) {
             $iSigner = $this->iClientProfile->getSigner();
         }
-        if (null == $credential) {
+        if ($credential == null) {
             $credential = $this->iClientProfile->getCredential();
         }
         if ($this->iClientProfile->isRamRoleArn()) {
@@ -67,7 +75,7 @@ class DefaultAcsClient implements IAcsClient
         if ($this->iClientProfile->isEcsRamRole()) {
             $credential = $this->ecsRamRoleService->getSessionCredential();
         }
-        if (null == $credential) {
+        if ($credential == null) {
             throw new ClientException('Incorrect user credentials.', 'SDK.InvalidCredential');
         }
 
@@ -75,14 +83,14 @@ class DefaultAcsClient implements IAcsClient
 
         // Get the domain from the Location Service by speicified `ServiceCode` and `RegionId`.
         $domain = null;
-        if (null != $request->getLocationServiceCode()) {
+        if ($request->getLocationServiceCode() != null) {
             $domain = $this->locationService->findProductDomain($request->getRegionId(), $request->getLocationServiceCode(), $request->getLocationEndpointType(), $request->getProduct());
         }
         if ($domain == null) {
             $domain = EndpointProvider::findProductDomain($request->getRegionId(), $request->getProduct());
         }
 
-        if (null == $domain) {
+        if ($domain == null) {
             throw new ClientException('Can not find endpoint to access.', 'SDK.InvalidRegionId');
         }
         $requestUrl = $request->composeUrl($iSigner, $credential, $domain);
@@ -106,26 +114,20 @@ class DefaultAcsClient implements IAcsClient
             } else {
                 $httpResponse = HttpHelper::curl($requestUrl, $request->getMethod(), $request->getContent(), $request->getHeaders());
             }
-            $retryTimes++;
+            ++$retryTimes;
         }
         return $httpResponse;
     }
 
-    public function doAction($request, $iSigner = null, $credential = null, $autoRetry = true, $maxRetryNumber = 3)
-    {
-        trigger_error('doAction() is deprecated. Please use getAcsResponse() instead.', E_USER_NOTICE);
-        return $this->doActionImpl($request, $iSigner, $credential, $autoRetry, $maxRetryNumber);
-    }
-
     private function prepareRequest($request)
     {
-        if (null == $request->getRegionId()) {
+        if ($request->getRegionId() == null) {
             $request->setRegionId($this->iClientProfile->getRegionId());
         }
-        if (null == $request->getAcceptFormat()) {
+        if ($request->getAcceptFormat() == null) {
             $request->setAcceptFormat($this->iClientProfile->getFormat());
         }
-        if (null == $request->getMethod()) {
+        if ($request->getMethod() == null) {
             $request->setMethod('GET');
         }
         return $request;
@@ -138,11 +140,11 @@ class DefaultAcsClient implements IAcsClient
 
     private function parseAcsResponse($body, $format)
     {
-        if ('JSON' == $format) {
+        if ($format == 'JSON') {
             $respObject = json_decode($body);
-        } elseif ('XML' == $format) {
+        } elseif ($format == 'XML') {
             $respObject = @simplexml_load_string($body);
-        } elseif ('RAW' == $format) {
+        } elseif ($format == 'RAW') {
             $respObject = $body;
         }
         return $respObject;

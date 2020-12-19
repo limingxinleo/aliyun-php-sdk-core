@@ -1,26 +1,27 @@
 <?php
-/**
- * This file is part of Swoft.
- *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
- */
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 namespace Xin\Aliyun\Core\Auth;
 
 use Xin\Aliyun\Core\Constant;
 
 class RamRoleArnService
 {
+    public static $serviceDomain = 'sts.aliyuncs.com';
+
     private $clientProfile;
 
-    private $lastClearTime = null;
+    private $lastClearTime;
 
-    private $sessionCredential = null;
-
-    public static $serviceDomain = 'sts.aliyuncs.com';
+    private $sessionCredential;
 
     public function __construct($clientProfile)
     {
@@ -60,7 +61,7 @@ class RamRoleArnService
 
         $httpResponse = HttpHelper::curl($requestUrl, $request->getMethod(), null, $request->getHeaders());
 
-        if (!$httpResponse->isSuccess()) {
+        if (! $httpResponse->isSuccess()) {
             return null;
         }
 

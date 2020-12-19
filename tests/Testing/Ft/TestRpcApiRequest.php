@@ -1,27 +1,28 @@
 <?php
+
+declare(strict_types=1);
 /**
- * This file is part of Swoft.
+ * This file is part of Hyperf.
  *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 namespace SwoftTest\Testing\Ft;
-
 
 use Xin\Aliyun\Core\RpcAcsRequest;
 
 class TestRpcApiRequest extends RpcAcsRequest
 {
+    private $queryParam;
+
+    private $bodyParam;
+
     public function __construct()
     {
         parent::__construct('Ft', '2016-01-01', 'TestRpcApi');
     }
-
-    private $queryParam;
-
-    private $bodyParam;
 
     public function getQueryParam()
     {

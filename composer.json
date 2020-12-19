@@ -10,7 +10,7 @@
     "authors": [
         {
             "name": "李铭昕",
-            "email": "limingxin@swoft.org"
+            "email": "l@hyperf.io"
         }
     ],
     "autoload": {
@@ -37,5 +37,10 @@
         "swoole/ide-helper": "dev-master",
         "swow/swow": "dev-develop",
         "symfony/var-dumper": "^5.1"
+    },
+    "scripts": {
+        "test": "phpunit -c phpunit.xml --colors=always",
+        "analyse": "phpstan analyse --memory-limit 1024M -l 0 ./src",
+        "cs-fix": "php-cs-fixer fix $1"
     }
 }

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
 /**
- * This file is part of Swoft.
+ * This file is part of Hyperf.
  *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 namespace Xin\Aliyun\Core\Profile;
 
@@ -66,7 +68,7 @@ class DefaultProfile implements IClientProfile
 
     public function getSigner()
     {
-        if (null == self::$isigner) {
+        if (self::$isigner == null) {
             self::$isigner = new ShaHmac1Signer();
         }
         return self::$isigner;
@@ -84,7 +86,7 @@ class DefaultProfile implements IClientProfile
 
     public function getCredential()
     {
-        if (null == self::$credential && null != self::$iCredential) {
+        if (self::$credential == null && self::$iCredential != null) {
             self::$credential = self::$iCredential;
         }
         return self::$credential;
@@ -108,7 +110,7 @@ class DefaultProfile implements IClientProfile
 
     public static function getEndpoints()
     {
-        if (null == self::$endpoints) {
+        if (self::$endpoints == null) {
             self::$endpoints = EndpointProvider::getEndpoints();
         }
         return self::$endpoints;
@@ -116,11 +118,11 @@ class DefaultProfile implements IClientProfile
 
     public static function addEndpoint($endpointName, $regionId, $product, $domain)
     {
-        if (null == self::$endpoints) {
+        if (self::$endpoints == null) {
             self::$endpoints = self::getEndpoints();
         }
         $endpoint = self::findEndpointByName($endpointName);
-        if (null == $endpoint) {
+        if ($endpoint == null) {
             self::addEndpoint_($endpointName, $regionId, $product, $domain);
         } else {
             self::updateEndpoint($regionId, $product, $domain, $endpoint);
@@ -149,13 +151,13 @@ class DefaultProfile implements IClientProfile
     private static function updateEndpoint($regionId, $product, $domain, $endpoint)
     {
         $regionIds = $endpoint->getRegionIds();
-        if (!in_array($regionId, $regionIds)) {
+        if (! in_array($regionId, $regionIds)) {
             array_push($regionIds, $regionId);
             $endpoint->setRegionIds($regionIds);
         }
 
         $productDomains = $endpoint->getProductDomains();
-        if (null == self::findProductDomainAndUpdate($productDomains, $product, $domain)) {
+        if (self::findProductDomainAndUpdate($productDomains, $product, $domain) == null) {
             array_push($productDomains, new ProductDomain($product, $domain));
         }
 

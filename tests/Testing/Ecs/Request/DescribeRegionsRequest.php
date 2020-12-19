@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
 /**
- * This file is part of Swoft.
+ * This file is part of Hyperf.
  *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 namespace SwoftTest\Testing\Ecs\Request;
 
@@ -13,11 +15,6 @@ use Xin\Aliyun\Core\RpcAcsRequest;
 
 class DescribeRegionsRequest extends RpcAcsRequest
 {
-    public function __construct()
-    {
-        parent::__construct('Ecs', '2014-05-26', 'DescribeRegions');
-    }
-
     private $ownerId;
 
     private $resourceOwnerAccount;
@@ -25,6 +22,11 @@ class DescribeRegionsRequest extends RpcAcsRequest
     private $resourceOwnerId;
 
     private $ownerAccount;
+
+    public function __construct()
+    {
+        parent::__construct('Ecs', '2014-05-26', 'DescribeRegions');
+    }
 
     public function getOwnerId()
     {

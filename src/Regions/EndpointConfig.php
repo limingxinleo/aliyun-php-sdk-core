@@ -1,16 +1,17 @@
 <?php
-/**
- * This file is part of Swoft.
- *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
- */
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
+use Xin\Aliyun\Core\Regions\Endpoint;
 use Xin\Aliyun\Core\Regions\EndpointProvider;
 use Xin\Aliyun\Core\Regions\ProductDomain;
-use Xin\Aliyun\Core\Regions\Endpoint;
 
 $endpoint_filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'endpoints.xml';
 $xml = simplexml_load_string(file_get_contents($endpoint_filename));
@@ -21,23 +22,23 @@ $endpoints = [];
 
 foreach ($json_array['Endpoint'] as $json_endpoint) {
     # pre-process RegionId & Product
-    if (!array_key_exists('RegionId', $json_endpoint['RegionIds'])) {
+    if (! array_key_exists('RegionId', $json_endpoint['RegionIds'])) {
         $region_ids = [];
     } else {
         $json_region_ids = $json_endpoint['RegionIds']['RegionId'];
-        if (!is_array($json_region_ids)) {
+        if (! is_array($json_region_ids)) {
             $region_ids = [$json_region_ids];
         } else {
             $region_ids = $json_region_ids;
         }
     }
 
-    if (!array_key_exists('Product', $json_endpoint['Products'])) {
+    if (! array_key_exists('Product', $json_endpoint['Products'])) {
         $products = [];
     } else {
         $json_products = $json_endpoint['Products']['Product'];
 
-        if ([] === $json_products or !is_array($json_products)) {
+        if ($json_products === [] or ! is_array($json_products)) {
             $products = [];
         } elseif (array_keys($json_products) !== range(0, count($json_products) - 1)) {
             # array is not sequential

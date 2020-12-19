@@ -1,17 +1,23 @@
 <?php
+
+declare(strict_types=1);
 /**
- * This file is part of Swoft.
+ * This file is part of Hyperf.
  *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 namespace SwoftTest\Cases\Profile;
 
 use SwoftTest\Cases\AbstractTestCase;
 use Xin\Aliyun\Core\Profile\DefaultProfile;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class DefaultProfileTest extends AbstractTestCase
 {
     public function testGetProfile()
@@ -28,7 +34,7 @@ class DefaultProfileTest extends AbstractTestCase
         $profile->addEndpoint('cn-hangzhou', 'cn-hangzhou', 'TestProduct', 'testproduct.aliyuncs.com');
         $endpoints = $profile->getEndpoints();
         foreach ($endpoints as $key => $endpoint) {
-            if ('cn-hangzhou' == $endpoint->getName()) {
+            if ($endpoint->getName() == 'cn-hangzhou') {
                 $regionIds = $endpoint->getRegionIds();
                 $this->assertContains('cn-hangzhou', $regionIds);
 

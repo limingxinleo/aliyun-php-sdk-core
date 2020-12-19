@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
 /**
- * This file is part of Swoft.
+ * This file is part of Hyperf.
  *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 namespace Xin\Aliyun\Core\Exception;
 
@@ -13,6 +15,12 @@ use Exception;
 
 class ClientException extends Exception
 {
+    private $errorCode;
+
+    private $errorMessage;
+
+    private $errorType;
+
     public function __construct($errorMessage, $errorCode)
     {
         parent::__construct($errorMessage);
@@ -20,12 +28,6 @@ class ClientException extends Exception
         $this->errorCode = $errorCode;
         $this->setErrorType('Client');
     }
-
-    private $errorCode;
-
-    private $errorMessage;
-
-    private $errorType;
 
     public function getErrorCode()
     {

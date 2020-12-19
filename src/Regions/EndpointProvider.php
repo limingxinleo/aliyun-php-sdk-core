@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
 /**
- * This file is part of Swoft.
+ * This file is part of Hyperf.
  *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 namespace Xin\Aliyun\Core\Regions;
 
@@ -15,25 +17,12 @@ class EndpointProvider
 
     public static function findProductDomain($regionId, $product)
     {
-        if (null == $regionId || null == $product || null == self::$endpoints) {
+        if ($regionId == null || $product == null || self::$endpoints == null) {
             return null;
         }
         foreach (self::$endpoints as $key => $endpoint) {
             if (in_array($regionId, $endpoint->getRegionIds())) {
                 return self::findProductDomainByProduct($endpoint->getProductDomains(), $product);
-            }
-        }
-        return null;
-    }
-
-    private static function findProductDomainByProduct($productDomains, $product)
-    {
-        if (null == $productDomains) {
-            return null;
-        }
-        foreach ($productDomains as $key => $productDomain) {
-            if ($product == $productDomain->getProductName()) {
-                return $productDomain->getDomainName();
             }
         }
         return null;
@@ -47,5 +36,18 @@ class EndpointProvider
     public static function setEndpoints($endpoints)
     {
         self::$endpoints = $endpoints;
+    }
+
+    private static function findProductDomainByProduct($productDomains, $product)
+    {
+        if ($productDomains == null) {
+            return null;
+        }
+        foreach ($productDomains as $key => $productDomain) {
+            if ($product == $productDomain->getProductName()) {
+                return $productDomain->getDomainName();
+            }
+        }
+        return null;
     }
 }

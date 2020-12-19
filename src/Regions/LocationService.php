@@ -1,13 +1,14 @@
 <?php
-/**
- * This file is part of Swoft.
- *
- * @link     https://swoft.org
- * @document https://doc.swoft.org
- * @contact  limingxin@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
- */
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
 namespace Xin\Aliyun\Core\Regions;
 
 use Xin\Aliyun\Core\Constant;
@@ -15,13 +16,13 @@ use Xin\Aliyun\Core\Http\HttpHelper;
 
 class LocationService
 {
-    private $clientProfile;
-
     public static $cache = [];
 
     public static $lastClearTimePerProduct = [];
 
     public static $serviceDomain = Constant::LOCATION_SERVICE_DOMAIN;
+
+    private $clientProfile;
 
     public function __construct($clientProfile)
     {
@@ -84,7 +85,7 @@ class LocationService
 
         $httpResponse = HttpHelper::curl($requestUrl, $request->getMethod(), null, $request->getHeaders());
 
-        if (!$httpResponse->isSuccess()) {
+        if (! $httpResponse->isSuccess()) {
             return null;
         }
 
