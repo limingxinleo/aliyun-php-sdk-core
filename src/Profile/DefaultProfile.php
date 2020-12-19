@@ -16,6 +16,7 @@ use Xin\Aliyun\Core\Auth\EcsRamRoleCredential;
 use Xin\Aliyun\Core\Auth\RamRoleArnCredential;
 use Xin\Aliyun\Core\Auth\ShaHmac1Signer;
 use Xin\Aliyun\Core\Constant;
+use Xin\Aliyun\Core\Regions\Endpoint;
 use Xin\Aliyun\Core\Regions\EndpointProvider;
 use Xin\Aliyun\Core\Regions\LocationService;
 use Xin\Aliyun\Core\Regions\ProductDomain;

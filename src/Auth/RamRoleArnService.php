@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Xin\Aliyun\Core\Auth;
 
 use Xin\Aliyun\Core\Constant;
+use Xin\Aliyun\Core\Http\HttpHelper;
 
 class RamRoleArnService
 {

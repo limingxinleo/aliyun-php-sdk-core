@@ -64,4 +64,5 @@ jobs:
         run: cp .env.example .env
       - name: Run Test Cases
         run: |
+          composer analyse
           composer test

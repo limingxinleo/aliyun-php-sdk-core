@@ -11,6 +11,8 @@ declare(strict_types=1);
  */
 namespace Xin\Aliyun\Core;
 
+use Xin\Aliyun\Core\Auth\EcsRamRoleService;
+use Xin\Aliyun\Core\Auth\RamRoleArnService;
 use Xin\Aliyun\Core\Exception\ClientException;
 use Xin\Aliyun\Core\Exception\ServerException;
 use Xin\Aliyun\Core\Http\HttpHelper;

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Xin\Aliyun\Core\Auth;
 
 use Xin\Aliyun\Core\Constant;
+use Xin\Aliyun\Core\Http\HttpHelper;
 
 class EcsRamRoleService
 {
@@ -54,7 +55,7 @@ class EcsRamRoleService
 
         $requestUrl = 'http://100.100.100.200/latest/meta-data/ram/security-credentials/' . $ecsRamRoleCredential->getRoleName();
 
-        $httpResponse = HttpHelper::curl($requestUrl, 'GET', null, null);
+        $httpResponse = HttpHelper::curl($requestUrl);
         if (! $httpResponse->isSuccess()) {
             return null;
         }
