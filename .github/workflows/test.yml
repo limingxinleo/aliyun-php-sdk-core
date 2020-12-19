@@ -5,6 +5,9 @@ on: [push, pull_request]
 env:
   SWOOLE_VERSION: '4.5.9'
   SWOW_VERSION: 'develop'
+  REGION_ID: 'cn-shanghai'
+  ACCESS_KEY_ID: ${{ secrets.ALIYUN_TEST_ACCESS_KEY_ID }}
+  ACCESS_SECRET: ${{ secrets.ALIYUN_TEST_ACCESS_SECRET }}
 
 jobs:
   ci:
@@ -61,5 +64,4 @@ jobs:
         run: cp .env.example .env
       - name: Run Test Cases
         run: |
-          composer analyse
           composer test
