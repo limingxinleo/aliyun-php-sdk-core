@@ -23,7 +23,7 @@ abstract class AbstractTestCase extends TestCase
     /** @var DefaultAcsClient */
     public $client;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $iClientProfile = DefaultProfile::getProfile(
@@ -35,7 +35,7 @@ abstract class AbstractTestCase extends TestCase
         $this->client = new DefaultAcsClient($iClientProfile);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
     }
