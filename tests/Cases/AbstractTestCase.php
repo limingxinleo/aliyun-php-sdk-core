@@ -27,9 +27,9 @@ abstract class AbstractTestCase extends TestCase
     {
         parent::setUp();
         $iClientProfile = DefaultProfile::getProfile(
-            'cn-shanghai',
-            'LTAICF4YQ71yNSxK',
-            'KR8oj49PJl3dT20vLCcxrDrCp1t769'
+            getenv('ACCESS_KEY_ID'),
+            getenv('ACCESS_KEY_ID'),
+            getenv('ACCESS_SECRET')
         );
 
         $this->client = new DefaultAcsClient($iClientProfile);

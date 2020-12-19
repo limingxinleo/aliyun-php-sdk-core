@@ -57,6 +57,8 @@ jobs:
           php --ri swow
       - name: Setup Packages
         run: composer update -o --no-scripts
+      - name: Setup Environments
+        run: cp .env.example .env
       - name: Run Test Cases
         run: |
           composer analyse
