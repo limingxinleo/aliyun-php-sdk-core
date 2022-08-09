@@ -17,9 +17,9 @@ use Xin\Aliyun\Core\Http\HttpResponse;
 
 class CurlAdapter implements HttpAdapter
 {
-    public static $connectTimeout = 30; //30 second
+    public static $connectTimeout = 30; // 30 second
 
-    public static $readTimeout = 80; //80 second
+    public static $readTimeout = 80; // 80 second
 
     public function request($url, $httpMethod = 'GET', $postFields = null, $headers = null): HttpResponse
     {
@@ -42,7 +42,7 @@ class CurlAdapter implements HttpAdapter
         if (self::$connectTimeout) {
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::$connectTimeout);
         }
-        //https request
+        // https request
         if (strlen($url) > 5 && strtolower(substr($url, 0, 5)) == 'https') {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
