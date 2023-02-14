@@ -60,7 +60,7 @@ class EcsRamRoleService
             return null;
         }
 
-        $respObj = json_decode($httpResponse->getBody());
+        $respObj = json_decode((string) $httpResponse->getBody());
 
         $code = $respObj->Code;
         if ($code != 'Success') {

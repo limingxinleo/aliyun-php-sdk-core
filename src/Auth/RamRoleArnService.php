@@ -66,7 +66,7 @@ class RamRoleArnService
             return null;
         }
 
-        $respObj = json_decode($httpResponse->getBody());
+        $respObj = json_decode((string) $httpResponse->getBody());
 
         $sessionAccessKeyId = $respObj->Credentials->AccessKeyId;
         $sessionAccessKeySecret = $respObj->Credentials->AccessKeySecret;

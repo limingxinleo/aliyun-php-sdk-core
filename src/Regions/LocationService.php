@@ -89,7 +89,7 @@ class LocationService
             return null;
         }
 
-        $respObj = json_decode($httpResponse->getBody());
+        $respObj = json_decode((string) $httpResponse->getBody());
         return $respObj->Endpoints->Endpoint[0]->Endpoint;
     }
 }
